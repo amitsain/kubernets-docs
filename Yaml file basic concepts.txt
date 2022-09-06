@@ -1,0 +1,43 @@
+1. Create pode in kubernets
+#kubectl run myfirstpod --generator=run-pod/v1 --image=coolgaurav147/nginx-custom (contaniner image name)
+# kubectl get pods and kubectl get po
+# kubectl run myfirstpod --dry-run=client --generator=run-pod/v1 --image=coolgaurav147/nginx-custom // run as on client side, mean ye client side pe check karega 
+
+2. Create pods using YAML file
+# kubectl explain  pod  // apiversion,  kind,  metadata,  spec  ye remember rakha jo bhi mention  h  yaml file mai ye aayega contents
+cat >> firstpod.yaml
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: myfirstpod
+  labels:
+    enviroment: devops
+  
+spec:
+  containers:
+  - name: myfirstcontainer
+    image: coolgaurav147/nginx-custom
+
+# kubectl  create -f firstpod.yaml --dry-run // check verify yaml syntax, this command at client end.
+# kubectl  create -f firstpod.yaml  //  kubectl  apply -f firstpod.yaml
+# kubectl  explain pod --recursive  // check yaml files structure for pod creation kya option ha and kese use honge
+# kubectl  run secondpod --dry-run --generator=run-pod/v1 --image=coolgaurav147/nginx-custom -o yaml // if you don't know how to create vm file and syntax , 
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: secondpod
+  name: secondpod
+spec:
+  containers:
+  - image: coolgaurav147/nginx-custom
+    name: secondpod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+#  kubectl  run secondpod --dry-run --generator=run-pod/v1 --image=coolgaurav147/nginx-custom -o yaml  > myfirstpod.yaml // you can save output in new file and change the contents as your
+recuirmnent with yaml extesnion

@@ -1,0 +1,44 @@
+********************COMMANDS FOR DEMO********************
+#ALL COMMAND ON MASATER ON WORKER
+apt-get update ; apt-get install apt-transport-https ;  apt install docker.io -y
+docker --version
+systemctl start docker ; systemctl enable docker
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add 
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/kubernetes.list
+apt-get update
+apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+---------------------------------------------
+
+Allow port on both machine and also put swapoff -a on bothmachine
+---------------
+
+firewall-cmd --permanent --add-port=6443/tcp
+firewall-cmd --permanent --add-port=2379-2380/tcp
+firewall-cmd --permanent --add-port=10250/tcp
+firewall-cmd --permanent --add-port=10251/tcp
+firewall-cmd --permanent --add-port=10252/tcp
+firewall-cmd --permanent --add-port=10255/tcp
+firewall-cmd --permanent --add-port=30000-32767/tcp
+
+------------------------------------
+######################################################
+BOOTSTRAPPING THE MASTER NODE (IN MASTER)
+kubeadm init
+#COPY THE COMMAND TO RUN IN NODES & SAVE IN NOTEPAD
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+############################################
+
+#######################################
+#On Worker node
+CONFIGURE WORKER NODES (IN NODES)
+COPY LONG CODE PROVIDED MY MASTER IN NODE NOW LIKE CODE GIVEN BELOW
+e.g- kubeadm join 94.198.97.61:6443 --token uqw278.ejqu2zhvcphcdrme --discovery-token-ca-cert-hash sha256:ade6505a17937b1d2d7e1bfafb342d666ae3ee5d014da859f9c85bf960085e86
+
+GO TO MASTER AND RUN THIS COMMAND
+kubectl get nodes
+
+***********************END*************************************

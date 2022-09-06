@@ -1,0 +1,7 @@
+1. kubectl get pods
+2. kubectl  describe pod podname
+3. kubectl label pod podname label=test
+4. kubectl  describe pod podname  // check label env=test
+5. kubectl label --overwrite pod podname label=test // overwrite label or change label
+6. kubectl label pod podname label-  // delete label
+7. kubectl label pods --all label=xyz  // add label for all pods

@@ -1,0 +1,15 @@
+1. Create pode in kubernets
+#kubectl run myfirstpod --generator=run-pod/v1 --image=coolgaurav147/nginx-custom 
+// Container image:- coolgaurav147/nginx-custom
+# kubectl get pods and kubectl get po
+2. how to check which pod running in which node
+# kubectl get pods 
+#kubectl get po -o wide/#kubectl get po -w  and   # kubectl get po -o yaml(yaml format)   and   #kubectl get po -o (json format)
+3. explain command:- use to find overview about any intity
+# kubectl explain pods
+4. describe command:- to describe about  intity
+#kubectl describe resource_type resource_name
+#kubectl  describe pod podname
+5. how to delete pods
+# kubectl delete resource_type resource_name
+# kubectl delete pod podnmae

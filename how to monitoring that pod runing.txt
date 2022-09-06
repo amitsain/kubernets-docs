@@ -1,0 +1,15 @@
+How to monitor that a Pod is always running?
+
+We can introduce probes. A liveness probe with a Pod is ideal in this scenario.
+
+A liveness probe always checks if an application in a pod is running,  if this check fails the container gets restarted. This is ideal in many scenarios where the container is running but somehow the application inside a container crashes.
+
+spec:
+containers:
+- name: liveness
+image: k8s.gcr.io/liveness
+args:
+- /server
+livenessProbe:
+      httpGet:
+        path: /healthz

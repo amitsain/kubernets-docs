@@ -1,0 +1,36 @@
+1. how to create two container.:- first of all create a yaml file for createing two container
+
+-----------------
+ [root@master-node ~]# vi^C
+[root@master-node ~]# cat firstpod.yaml
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod1
+  labels:
+    app: myapp1
+    type: fronted
+
+spec:
+  containers:
+    - name: firstcont
+      image: coolgourav147/nginx-custom
+      env:
+        - name: myname
+          value: amit
+      args: ["sleep",  "3600"]
+    - name: secondcont
+      image: coolgourav147/nginx-custom
+
+----------------
+Now you have to longign to each container  vai command 
+# kubectl  exec pod1 -c firstcont  pod1 -it bash 
+# kubectl  exec pod1 -c  secondcont  pod1 -it bash
+
+now communicate to each other 
+#fisrt container 
+#netstat -l -p 8000 // open port 
+# second conatainer  netstat -nltp
+#telnet localhost 8000
+//Now they are communicate each other by sending message.

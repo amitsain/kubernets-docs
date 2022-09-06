@@ -1,0 +1,2 @@
+#ReplicationController only support equality based supportor
+#ReplicatSet Support equality base or set based supportor

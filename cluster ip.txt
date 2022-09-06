@@ -1,0 +1,13 @@
+1.cluster IP service:-  cluster ip available your service in cluster enviroment.
+you have to expose ip service, we have to expose cluster ip service command
+# kubectl expose  pod pod1 --port=8000 --target-port=80  --name  firstservie
+
+#[root@master-node ~]# kubectl  get svc
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+firstservie   ClusterIP   10.100.148.30   <none>        8000/TCP   10m
+kubernetes    ClusterIP   10.96.0.1       <none>        443/TCP    5d7h
+
+2. now you can acces cluster IP service via 
+# curl 10.100.148.30:800 // all nodes in clusetr
+
+// https://stackoverflow.com/questions/53621937/connection-refused-when-trying-to-connect-to-services-in-kubernetes

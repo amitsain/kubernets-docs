@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  first-deployment
+spec:
+  minReadySeconds: 3
+  replicas: 5
+  strategy:
+    type: Recreate
+      maxSurge: 2
+      maxUnavailable: 0
+    
+  selector:
+    matchLabels:
+      name: production
+  template:
+    metadata:
+      name: secondpod
+      labels:
+        name: production
+    spec:
+      containers:
+        - name: c00
+          image: coolgourav147/nginx-custom:v1
+          ports:
+            - containerPort: 80

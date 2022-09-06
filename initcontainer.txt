@@ -1,0 +1,46 @@
+1. Create initcontainer:- 
+[root@master-node ~]# cat firstpod.yaml
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod1
+  labels:
+    app: myapp1
+    type: fronted
+
+spec:
+  containers:
+    - name: firstcont
+      image: coolgourav147/nginx-custom
+      env:
+        - name: myname
+          value: amit
+      args: ["sleep",  "3600"]
+    - name: secondcont
+      image: coolgourav147/nginx-custom
+  initContainers:
+    - name: initcont
+      image: coolgourav147/nginx-custom
+      env:
+        - name: myname
+          value: amit
+      args: ["sleep",  "30"]
+
+#kubectl  apply  -f firstpod.yaml
+2 first run initcontainer then after that create anothet container, 
+#[root@master-node ~]# kubectl  get  po -o wide -w
+NAME   READY   STATUS     RESTARTS   AGE   IP          NODE                            NOMINATED NODE   READIN                                                                                       ESS GATES
+pod1   0/2     Init:0/1   0          15s   10.32.0.2   worker-node1.onliveserver.com   <none>           <none>
+
+#root@master-node ~]# kubectl  get  po -o wide -w
+NAME   READY   STATUS            RESTARTS   AGE   IP          NODE                            NOMINATED NODE   READINESS GATES
+pod1   0/2     PodInitializing   0          36s   10.32.0.2   worker-node1.onliveserver.com   <none>           <none>
+pod1   2/2     Running           0          43s   10.32.0.2   worker-node1.onliveserver.com   <none>           <none>
+
+#[root@master-node ~]# kubectl  get  po  -w
+NAME   READY   STATUS    RESTARTS   AGE
+pod1   2/2     Running   0          62s
+
+
+// note:- check status init container run and execute task within 30 sen then anothet container run.

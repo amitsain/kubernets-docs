@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: production
+  name: firstpod
+spec:
+  containers:
+  - image: akkisain/nginx-custom:v1
+    name: firstcont
+
+---------------------------------------
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: firstpod
+  name: firstpod
+spec:
+  containers:
+    - image: coolgourav147/nginx-custom
+      name: firstpod
+
+------------------------------------------
+
+# kubectl  create -f firstpod.yaml --dry-run // Check and run command at client side
+# kubectl  create -f firstpod.yaml  //  kubectl  apply -f firstpod.yaml
+# kubectl  explain pod --recursive | less  // check instruction for pod and any resoureces uses.
+# kubectl  run secondpod --dry-run --generator=run-pod/v1 --image=coolgaurav147/nginx-custom -o yaml // if you don't know how to create vm file and syntax , 
+#  kubectl  run secondpod --dry-run --generator=run-pod/v1 --image=coolgaurav147/nginx-custom -o yaml  > myfirstpod.yaml // you can save output in new file and change the contents as your
+recuirmnent with yaml extesnion

@@ -1,0 +1,27 @@
+#how to set enviroment variable on conatainer
+# cat one.yaml
+[root@master-node ~]# cat onepod.yaml
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: myfirstpod
+  labels:
+    env: test
+    env1: test
+    env2: test
+
+spec:
+  containers:
+    - name: myfirstcontainer
+      image: coolgaurav147/nginx-custom
+      env:
+        - name: myname
+          value: amit
+        - name: city
+          value: jaipur
+#at worker node # docker container exec -it container_id env
+# kubectl exec myfirstpod env // for single container
+# kubectl exec  myfirstpod -c myfirstcontainer env // for multiple contaliner
+# kubectl exec  myfirstpod -c myfirstcontainer -it bash // for longing to containers
+# kubectl exec  myfirstpod -c myfirstcontainer -it ls / // files and folers list

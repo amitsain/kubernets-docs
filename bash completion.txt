@@ -1,0 +1,17 @@
+1.yum install bash-completion
+2. echo $SHELL
+3. kubectl completion bash 
+4. cd  .kube
+5. kubectl completion bash  > kubecom.sh
+6. source $HOME/.kube/kubecom.sh
+7.  vi .bash_profile
+source $HOME/.kube/kubecom.sh     ## add this line
+
+##working
+# yum install -y bash-completion
+
+# source /usr/share/bash-completion/bash_completion
+
+# source <(kubectl completion bash)
+
+You can complete the completion.

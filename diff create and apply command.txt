@@ -1,0 +1,7 @@
+differnece in apply and craete command
+1. impreative obj configuration:- create
+2. depreative obj confiruration:- apply
+3. kubectl create -f yaml_file
+4. kubectl apply -f yaml_file
+5. kubectl edit resuoure_type resource_name // kubectl edit pod podname
+6. kubectl diff -f filename
